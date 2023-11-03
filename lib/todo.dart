@@ -1,19 +1,35 @@
+import 'todo_fields.dart';
 class ToDo {
-  String id;
-  String title;
+  final int? id;
+  final String title;
   bool isDone;
 
-  ToDo({required this.id, required this.title, this.isDone = false});
+  ToDo({
+    this.id,
+    required this.title,
+    this.isDone = false,
+  });
 
-  Map<String, dynamic> toJson() => {
-    'id': id,
-    'title': title,
-    'isDone': isDone,
+  ToDo copy({
+    int? id,
+    String? title,
+    bool? isDone,
+  }) =>
+      ToDo(
+        id: id ?? this.id,
+        title: title ?? this.title,
+        isDone: isDone ?? this.isDone,
+      );
+
+  Map<String, Object?> toJson() => {
+    ToDoFields.id: id,
+    ToDoFields.title: title,
+    ToDoFields.isDone: isDone ? 1 : 0,
   };
 
-  static ToDo fromJson(Map<String, dynamic> json) => ToDo(
-    id: json['id'],
-    title: json['title'],
-    isDone: json['isDone'],
+  static ToDo fromJson(Map<String, Object?> json) => ToDo(
+    id: json[ToDoFields.id] as int?,
+    title: json[ToDoFields.title] as String,
+    isDone: json[ToDoFields.isDone] == 1,
   );
 }
