@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'todo.dart';
 import 'database_helper.dart';
+import 'todo.dart';
+import 'package:path_provider/path_provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,9 +12,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'To-Do List',
+      // Define the default light theme.
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      // Define the default dark theme.
+      darkTheme: ThemeData(
+        primarySwatch: Colors.blue,
+        brightness: Brightness.dark,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      // Use the system theme mode.
+      themeMode: ThemeMode.system,
       home: ToDoListScreen(),
     );
   }
